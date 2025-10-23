@@ -1,0 +1,35 @@
+<!--for users to register-->>
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-5">
+    <div class="glass-card p-4 p-md-5">
+      <h2 class="mb-3 fw-bold text-center">Create Account</h2>
+      <p class="text-center text-muted mb-4">Set a username & password</p>
+
+      <!-- 注册表单：POST 到 /register；后端做重复用户名检查 -->
+      <form method="post" novalidate>
+        <div class="mb-3">
+          <label class="form-label">Username</label>
+          <input name="username" class="form-control form-control-lg" placeholder="Pick a username" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <div class="input-group">
+            <input id="pwd2" name="password" type="password" class="form-control form-control-lg" placeholder="Create a password" required>
+            <button class="btn btn-outline-secondary" type="button" id="eye2" onclick="togglePwd('pwd2','eye2')">👁️</button>
+          </div>
+        </div>
+
+        <button class="btn btn-success btn-lg w-100 mb-3 glow-btn">Register</button>
+      </form>
+
+      <div class="text-center">
+        <small class="text-muted">Already have an account? <a class="link-light" href="{{ url_for('login') }}">Log in</a></small>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

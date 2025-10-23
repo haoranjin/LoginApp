@@ -1,0 +1,42 @@
+<!--fancy page-->>
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-5">
+    <!-- 玻璃拟态卡片容器 -->
+    <div class="glass-card p-4 p-md-5">
+      <h2 class="mb-3 fw-bold text-center">Welcome Back</h2>
+      <p class="text-center text-muted mb-4">Log in to continue</p>
+
+      <!-- 后端若给出 error 文本（账号不存在/密码错误），就显示 -->
+      {% if error %}
+        <div class="alert alert-danger glass-alert">{{ error }}</div>
+      {% endif %}
+
+      <!-- 登录表单：POST 到当前 /login -->
+      <form method="post" novalidate>
+        <div class="mb-3">
+          <label class="form-label">Username</label>
+          <input name="username" class="form-control form-control-lg" placeholder="Your username" required>
+        </div>
+
+        <div class="mb-3 position-relative">
+          <label class="form-label">Password</label>
+          <div class="input-group">
+            <!-- 输入框 id=pwd，小眼睛按钮用它的 id 切换明/暗文 -->
+            <input id="pwd" name="password" type="password" class="form-control form-control-lg" placeholder="Your password" required>
+            <button class="btn btn-outline-secondary" type="button" id="eye" onclick="togglePwd('pwd','eye')">👁️</button>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-lg w-100 mb-3 glow-btn">Log In</button>
+      </form>
+
+      <div class="text-center">
+        <small class="text-muted">No account? <a class="link-light" href="{{ url_for('register') }}">Create one</a></small>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

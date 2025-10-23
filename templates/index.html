@@ -1,0 +1,31 @@
+<!--no forcing login-->>
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="glass-card p-4 p-md-5">
+      <h1 class="fw-bold mb-4 text-center">Welcome to JOHTO!</h1>
+
+      <!-- 如果未登录，给出提示并引导去登录/注册 -->
+      {% if not username %}
+        <div class="alert alert-warning glass-alert">
+          You are not logged in. <a href="{{ url_for('login') }}">Log in</a> or <a href="{{ url_for('register') }}">register</a> to create posts.
+        </div>
+      {% endif %}
+
+      <!-- 文章列表（可选），来自 main.py 的 posts 查询 -->
+      {% for post in posts %}
+        <div class="mb-4">
+          <h4><a class="link-light" href="{{ url_for('post_detail', post_id=post['id']) }}">{{ post['title'] }}</a></h4>
+          <p class="text-muted small mb-1">{{ post['created'] }}</p>
+          <p>{{ post['content'] }}</p>
+        </div>
+        <hr class="glass-hr">
+      {% else %}
+        <p>No posts yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
